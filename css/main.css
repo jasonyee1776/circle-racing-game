@@ -1,0 +1,11 @@
+#resetButton {
+    position: absolute;
+    left: 20%;
+}
+#heading {
+    font-size: 3em;
+}
+
+* {
+      font-family: 'Open Sans Condensed', sans-serif;
+}
