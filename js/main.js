@@ -1,6 +1,7 @@
 // Coin racing web application that randomly moves coin when user pushes a button and records outcome
 
 
+
 // Create canvas element to draw coins on page
 var circle = document.createElement("canvas");
 circle.id = "canvas";
@@ -69,14 +70,11 @@ function finish() {
 		console.log("heads won!")
 		document.body.style.backgroundColor = "red"
 		button.style.display = "none"
-		// create reset button
-		reset();
+
 	} else if (blueX > circleWidth / 1.5 && redX < circleWidth / 1.5) {
 		console.log("won!")
 		document.body.style.backgroundColor = "blue"
 		button.style.display = "none"
-		// create reset button
-		reset();
 
 	}
 }
@@ -92,15 +90,14 @@ function reset() {
 
  // add logic that resets redX and blueX original position
  function resetPos() {
-	 document.body.style.backgroundColor = "white";
-	document.getElementById("resetButton").style.display = "none";
-	 redX = 100;
-	 blueX = 100;
-	 button.style.display = "block"
-	 redCounter = 0
-	 blueCounter = 0
-	 pushRed();
-	 pushBlue();
+	document.body.style.backgroundColor = "white";	
+	redX = 100;
+	blueX = 100;
+	button.style.display = "block";
+	redCounter = 0;
+	blueCounter = 0
+	pushRed();
+	pushBlue();
  }
 
 
@@ -135,7 +132,7 @@ function pushRed() {
 	drawRed();
 	finishLine()
 	// speed of red circle
-	redX += 20;
+	redX += 30;
 }
 
 // funtion to push blue circle
@@ -144,7 +141,7 @@ function pushBlue() {
 	finishLine()
 	drawBlue();
 	// speed of blue circle
-	blueX += 20;
+	blueX += 30;
 }
 
 // draw finish line
@@ -157,5 +154,6 @@ function finishLine() {
 drawRed();
 drawBlue();
 finishLine()
+reset();
 
 
