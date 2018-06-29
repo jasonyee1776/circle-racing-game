@@ -1,7 +1,7 @@
 #resetButton {
-    position: absolute;
-    left: 20%;
+    margin-top: 10px;
 }
+
 #heading {
     font-size: 3em;
 }

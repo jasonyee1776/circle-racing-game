@@ -3,25 +3,20 @@
 
 // Create canvas element to draw coins on page
 var circle = document.createElement("canvas");
-circle.id = "heads";
-circle.width = 650;
+circle.id = "canvas";
+let circleWidth = document.body.clientWidth;
+circle.width = circleWidth
 circle.height = 300;
 
-// Create a counter for the screen width size and append to h1
-let screenWidthSize = document.createElement("h1")
-screenWidthSize.innerHTML = circle.width;
-document.body.appendChild(screenWidthSize);
-window.addEventListener("resize", updateText) 
 
-
-// store values of Heads in var -  radius, width, height, start and end angle 
+// store values of Red in var -  radius, width, height, start and end angle 
 var redX = 100;
 var redY = 75;
 var redRadius = 50;
 var redStartAngle = 0;
 var redEndAngle = 2*Math.PI;
 
-// store values of Tails in var -  radius, width, height, start and end angle 
+// store values of Blue in var -  radius, width, height, start and end angle 
 var blueX = 100;
 var blueY = 225;
 var blueRadius = 50;
@@ -46,7 +41,7 @@ document.getElementById("scoreBoard").appendChild(button);
 var redCounter = 0;
 var blueCounter = 0;
 
-// create onclick event listener
+// create onclick event listener on "go" button
 button.addEventListener("click", function() {
 	// if random number <= 1  show heads else show tails
 	if ((Math.round(Math.random() * 100) / 100) < 0.50) {
@@ -70,18 +65,19 @@ button.addEventListener("click", function() {
 
 // logic for when player crosses finish line
 function finish() {
-	if (redX > 575 && blueX < 575) {
+	if (redX > circleWidth / 1.5 && blueX < circleWidth / 1.5) {
 		console.log("heads won!")
 		document.body.style.backgroundColor = "red"
 		button.style.display = "none"
 		// create reset button
 		reset();
-	} else if (blueX > 575 && redX < 575) {
+	} else if (blueX > circleWidth / 1.5 && redX < circleWidth / 1.5) {
 		console.log("won!")
 		document.body.style.backgroundColor = "blue"
 		button.style.display = "none"
 		// create reset button
 		reset();
+
 	}
 }
 
@@ -96,14 +92,15 @@ function reset() {
 
  // add logic that resets redX and blueX original position
  function resetPos() {
+	 document.body.style.backgroundColor = "white";
+	document.getElementById("resetButton").style.display = "none";
 	 redX = 100;
 	 blueX = 100;
 	 button.style.display = "block"
 	 redCounter = 0
 	 blueCounter = 0
-	 redX += 20;
-	 blueX += 20;
-
+	 pushRed();
+	 pushBlue();
  }
 
 
@@ -117,7 +114,7 @@ function updateText() {
 function drawRed() {
 	circleCtx.beginPath();
 	circleCtx.arc(redX, redY, redRadius, redStartAngle, redEndAngle);
-	circleCtx.lineWidth = 12;
+	circleCtx.lineWidth = 3;
 	circleCtx.fillStyle = "red"
 	circleCtx.fill();
 	circleCtx.stroke();
@@ -126,9 +123,8 @@ function drawRed() {
 function drawBlue() {
 	circleCtx.beginPath()
 	circleCtx.arc(blueX, blueY, blueRadius, blueStartAngle, blueEndAngle);
-	circleCtx.lineWidth = 12;
+	circleCtx.lineWidth = 3;
 	circleCtx.fillStyle = "blue"
-	circle.Ctx.classList.add("animated", "rollIn")
 	circleCtx.fill();
 	circleCtx.stroke();
 }
@@ -144,7 +140,7 @@ function pushRed() {
 
 // funtion to push blue circle
 function pushBlue() {
-	circleCtx.clearRect(-70, 150, circle.width, 165);
+	circleCtx.clearRect(0, 150, circle.width, 165);
 	finishLine()
 	drawBlue();
 	// speed of blue circle
@@ -154,7 +150,7 @@ function pushBlue() {
 // draw finish line
 function finishLine() {
 	circleCtx.fillStyle = "black";
-	circleCtx.fillRect(600, 0, 50, 300);
+	circleCtx.fillRect(circleWidth/1.5, 0, 40, 300);
 	circleCtx.stroke();
 }
 
